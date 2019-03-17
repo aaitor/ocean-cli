@@ -1,14 +1,12 @@
 package com.github.aaitor.cli.accounts;
 
-import com.github.aaitor.cli.Accounts;
+import com.github.aaitor.cli.AccountsCLI;
 import com.oceanprotocol.squid.exceptions.EthereumException;
 import com.oceanprotocol.squid.models.Account;
 import com.oceanprotocol.squid.models.Balance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
-
-import java.util.List;
 
 @CommandLine.Command(
         name = "balance",
@@ -18,7 +16,7 @@ public class AccountsBalance implements Runnable {
     private static final Logger log = LogManager.getLogger(AccountsBalance.class);
 
     @CommandLine.ParentCommand
-    Accounts parent;
+    AccountsCLI parent;
 
     @CommandLine.Spec
     CommandLine.Model.CommandSpec spec;
@@ -31,15 +29,15 @@ public class AccountsBalance implements Runnable {
             Balance balance = parent.cli.getOceanAPI().getAccountsAPI()
                     .balance(new Account(accountAddress, null));
 
-            log.info("Account [" + accountAddress + "] balance: " + balance.toString());
+            System.out.println("Account: " + accountAddress);
+            System.out.println("Balance: " + balance.toString());
         } catch (EthereumException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
     @Override
     public void run() {
         balance();
-        //spec.commandLine().usage(System.out);
     }
 }

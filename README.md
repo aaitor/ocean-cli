@@ -18,20 +18,20 @@ This library is under heavy development
 ### Expected Lifecycle
 
 ```
-# Show version information
+# Show version information (DONE)
 cli --version
 
 # Show config information
 cli --showConfig
 
-# Show help
+# Show help (DONE)
 cli --help
 
-# List existing accounts
+# List existing accounts  (DONE)
 cli accounts list 
 
-# Get account balance
-cli accounts 0x123
+# Get account balance  (DONE)
+cli accounts balance 0x123
 
 # Request some tokens
 cli tokens request 5

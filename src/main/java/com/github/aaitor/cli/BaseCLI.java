@@ -4,9 +4,9 @@ import com.github.aaitor.OceanCLI;
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "base",
-        description = "Base functions."
+        description = "BaseCLI functions."
 )
-public class Base implements Runnable {
+public class BaseCLI implements Runnable {
 
     @CommandLine.ParentCommand
     OceanCLI parent;
@@ -23,6 +23,6 @@ public class Base implements Runnable {
         if (isDid)
             resolveDid();
 
-        System.out.println("Base");
+        System.out.println("BaseCLI");
     }
 }

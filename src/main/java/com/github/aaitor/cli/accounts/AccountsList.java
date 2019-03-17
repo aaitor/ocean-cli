@@ -1,10 +1,8 @@
 package com.github.aaitor.cli.accounts;
 
-import com.github.aaitor.OceanCLI;
-import com.github.aaitor.cli.Accounts;
+import com.github.aaitor.cli.AccountsCLI;
 import com.oceanprotocol.squid.exceptions.EthereumException;
 import com.oceanprotocol.squid.models.Account;
-import com.oceanprotocol.squid.models.Balance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
@@ -19,7 +17,7 @@ public class AccountsList implements Runnable {
     private static final Logger log = LogManager.getLogger(AccountsList.class);
 
     @CommandLine.ParentCommand
-    Accounts parent;
+    AccountsCLI parent;
 
     void list() {
         log.debug("Listing accounts:");
@@ -31,7 +29,7 @@ public class AccountsList implements Runnable {
         }
 
         for (Account account: accounts) {
-            log.info("Account: " + account.toString());
+            System.out.println(account.getAddress());
         }
     }
 
