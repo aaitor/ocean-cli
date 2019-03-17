@@ -15,44 +15,60 @@ Ocean Protocol Command Line tool allowing to interact with the Ocean stack
 This library is under heavy development
 
 
-### Expected Lifecycle
+
+### Running Ocean CLI
+
+You can compile the application using the following command:
+
+```bash
+mvn clean package
+```
+
+This should generate the JAR package in the target folder. You can run the application using the usual way (`java -jar app.jar`). 
+Also, setting up an alias would make quicker and easier to run the application:
+```bash
+alias ocean-cli="java -jar target/ocean-cli-*-shaded.jar"
+```
 
 ```
 # Show version information (DONE)
-cli --version
+ocean-cli --version
 
 # Show config information
-cli --showConfig
+ocean-cli --showConfig
 
 # Show help (DONE)
-cli --help
+ocean-cli --help
 
 # List existing accounts  (DONE)
-cli accounts list 
+ocean-cli accounts list 
 
 # Get account balance  (DONE)
-cli accounts balance 0x123
+ocean-cli accounts balance 0x123
 
-# Request some tokens
-cli tokens request 5
+# Request some tokens (DONE)
+ocean-cli tokens request 5
 
-# Transfer tokens to other account
-cli tokens transfer 0x123 5
+# Transfers tokens to other account (DONE)
+ocean-cli tokens transfer 0x123 5
 
-# Creates an asset
-cli assets create metadata.json
+# Creates an asset (DONE)
+ocean-cli assets create --title title --dateCreated 2019 --author aitor --license CC-BY --contentType text/csv --price 10 --url https://raw.githubusercontent.com/oceanprotocol/OEPs/master/8/README.md
+
+# Imports an asset from a JSON file
+ocean-cli assets import metadata.json
 
 # Resolves a did
-cli assets resolve did:op:123
+ocean-cli assets resolve did:op:123
 
 # Search for assets
-cli assets search query
+ocean-cli assets search query
 
 # Order
-cli assets order did:op:123
+ocean-cli assets order did:op:123
 
 # Consume
-cli assets consume did:op:123
+ocean-cli assets consume did:op:123
 ```
 
 

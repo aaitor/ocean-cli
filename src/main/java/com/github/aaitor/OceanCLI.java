@@ -1,5 +1,6 @@
 package com.github.aaitor;
 
+import com.github.aaitor.cli.AssetsCLI;
 import com.github.aaitor.cli.TokensCLI;
 import com.github.aaitor.dto.SquidBase;
 import com.github.aaitor.cli.AccountsCLI;
@@ -20,7 +21,8 @@ import picocli.CommandLine.Command;
         subcommands = {
             BaseCLI.class,
             AccountsCLI.class,
-            TokensCLI.class
+            TokensCLI.class,
+            AssetsCLI.class
         })
 public class OceanCLI extends SquidBase implements Runnable {
 
