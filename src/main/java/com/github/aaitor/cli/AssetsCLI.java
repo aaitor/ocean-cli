@@ -2,6 +2,7 @@ package com.github.aaitor.cli;
 
 import com.github.aaitor.OceanCLI;
 import com.github.aaitor.cli.assets.AssetsCreate;
+import com.github.aaitor.cli.assets.AssetsResolve;
 import com.github.aaitor.cli.tokens.TokensRequest;
 import com.github.aaitor.cli.tokens.TokensTransfer;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +11,7 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "assets",
-        subcommands = {AssetsCreate.class},
+        subcommands = {AssetsCreate.class, AssetsResolve.class},
         description = "Registering of assets in the network")
 public class AssetsCLI implements Runnable {
 
