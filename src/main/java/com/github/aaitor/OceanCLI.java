@@ -1,10 +1,10 @@
 package com.github.aaitor;
 
 import com.github.aaitor.cli.AssetsCLI;
+import com.github.aaitor.cli.ConfigCLI;
 import com.github.aaitor.cli.TokensCLI;
 import com.github.aaitor.dto.SquidBase;
 import com.github.aaitor.cli.AccountsCLI;
-import com.github.aaitor.cli.BaseCLI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
@@ -19,12 +19,13 @@ import picocli.CommandLine.Command;
                 "@|blue ~ Welcome to Ocean CLI ~\n" +
                 ""},
         subcommands = {
-            BaseCLI.class,
+            ConfigCLI.class,
             AccountsCLI.class,
             TokensCLI.class,
             AssetsCLI.class
         })
 public class OceanCLI extends SquidBase implements Runnable {
+
 
     private static final Logger log = LogManager.getLogger(OceanCLI.class);
 

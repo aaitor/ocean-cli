@@ -2,22 +2,15 @@ package com.github.aaitor.cli.assets;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.aaitor.cli.AssetsCLI;
+import com.github.aaitor.cli.utils.CommandLineUtils;
 import com.oceanprotocol.squid.exceptions.DDOException;
 import com.oceanprotocol.squid.exceptions.DIDFormatException;
 import com.oceanprotocol.squid.exceptions.EthereumException;
 import com.oceanprotocol.squid.models.DDO;
 import com.oceanprotocol.squid.models.DID;
-import com.oceanprotocol.squid.models.asset.AssetMetadata;
-import com.oceanprotocol.squid.models.service.ServiceEndpoints;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
-
-import java.math.BigInteger;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Locale;
 
 @CommandLine.Command(
         name = "resolve",
@@ -43,7 +36,7 @@ public class AssetsResolve implements Runnable {
             DDO ddo = parent.cli.getOceanAPI().getAssetsAPI()
                     .resolve(new DID(did));
 
-            System.out.println(ddo.toJson().toString());
+            System.out.println(CommandLineUtils.prettyJson(ddo.getMetadataService().toJson()));
 
         } catch (DDOException | DIDFormatException | EthereumException | JsonProcessingException e) {
             log.error(e.getMessage());

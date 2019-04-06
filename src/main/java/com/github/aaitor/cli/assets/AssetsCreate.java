@@ -1,12 +1,12 @@
 package com.github.aaitor.cli.assets;
 
 import com.github.aaitor.cli.AssetsCLI;
+import com.github.aaitor.cli.utils.Constants;
 import com.oceanprotocol.squid.exceptions.DDOException;
 import com.oceanprotocol.squid.exceptions.DIDFormatException;
-import com.oceanprotocol.squid.exceptions.EthereumException;
 import com.oceanprotocol.squid.models.DDO;
 import com.oceanprotocol.squid.models.asset.AssetMetadata;
-import com.oceanprotocol.squid.models.service.ServiceEndpoints;
+import com.oceanprotocol.squid.models.service.ProviderConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
@@ -16,8 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import static com.github.aaitor.cli.utils.Constants.TransactionSuccess;
 
 @CommandLine.Command(
         name = "create",
@@ -72,20 +70,24 @@ public class AssetsCreate implements Runnable {
         } catch (ParseException e) {
             log.error("Error parsing date. Expected format: " + DDO.DATE_PATTERN);
             log.error(e.getMessage());
-        } catch (DDOException|DIDFormatException e) {
+        } catch (DDOException e) {
             log.error(e.getMessage());
         }
     }
 
-    ServiceEndpoints serviceEndpointsBuilder()  {
+    ProviderConfig serviceEndpointsBuilder()  {
 
-        return new ServiceEndpoints(parent.cli.getConfig().getString("brizo.consumeUrl"),
-                parent.cli.getConfig().getString("brizo.purchaseEndpoint"),
-                parent.cli.getConfig().getString("marketplace.metadataUrl"));
+        return new ProviderConfig(
+                parent.cli.getNetworkConfig().getString("brizo.url") + Constants.consumeUri,
+                parent.cli.getNetworkConfig().getString("brizo.url") + Constants.initializeUri,
+                parent.cli.getNetworkConfig().getString("aquarius.url") + Constants.metadataUri,
+                parent.cli.getNetworkConfig().getString("secretstore.url"),
+                parent.cli.getNetworkConfig().getString("provider.address")
+        );
 
     }
 
-    AssetMetadata assetMetadataBuilder() throws DIDFormatException, ParseException {
+    AssetMetadata assetMetadataBuilder() throws ParseException {
         AssetMetadata metadata= AssetMetadata.builder();
 
         metadata.base.name= title;
@@ -93,11 +95,12 @@ public class AssetsCreate implements Runnable {
         metadata.base.dateCreated= new SimpleDateFormat(DDO.DATE_PATTERN, Locale.ENGLISH).parse(dateCreated);
         metadata.base.author= author;
         metadata.base.license= license;
-        metadata.base.contentType= contentType;
         metadata.base.price= price.toString();
         ArrayList<AssetMetadata.File> files= new ArrayList<>();
         AssetMetadata.File file = new AssetMetadata.File();
+        file.index= 0;
         file.url= url;
+        file.contentType= contentType;
         files.add(file);
         metadata.base.files = files;
 
