@@ -3,7 +3,6 @@ package com.github.aaitor.cli.assets;
 import com.github.aaitor.cli.AssetsCLI;
 import com.github.aaitor.cli.utils.Constants;
 import com.oceanprotocol.squid.exceptions.DDOException;
-import com.oceanprotocol.squid.exceptions.DIDFormatException;
 import com.oceanprotocol.squid.models.DDO;
 import com.oceanprotocol.squid.models.asset.AssetMetadata;
 import com.oceanprotocol.squid.models.service.ProviderConfig;
@@ -63,7 +62,7 @@ public class AssetsCreate implements Runnable {
             log.info("Creating a new asset");
 
             DDO ddo = parent.cli.getOceanAPI().getAssetsAPI()
-                    .create(assetMetadataBuilder(), serviceEndpointsBuilder());
+                    .create(assetMetadataBuilder(), parent.serviceEndpointsBuilder());
 
             System.out.println("Asset Created: " + ddo.getDid().toString());
 
@@ -73,18 +72,6 @@ public class AssetsCreate implements Runnable {
         } catch (DDOException e) {
             log.error(e.getMessage());
         }
-    }
-
-    ProviderConfig serviceEndpointsBuilder()  {
-
-        return new ProviderConfig(
-                parent.cli.getNetworkConfig().getString("brizo.url") + Constants.consumeUri,
-                parent.cli.getNetworkConfig().getString("brizo.url") + Constants.initializeUri,
-                parent.cli.getNetworkConfig().getString("aquarius.url") + Constants.metadataUri,
-                parent.cli.getNetworkConfig().getString("secretstore.url"),
-                parent.cli.getNetworkConfig().getString("provider.address")
-        );
-
     }
 
     AssetMetadata assetMetadataBuilder() throws ParseException {
