@@ -33,7 +33,7 @@ public class AssetsImport implements Runnable {
     @CommandLine.Spec
     CommandLine.Model.CommandSpec spec;
 
-    @CommandLine.Option(names = { "-m", "--metadata" }, required = true, description = "Asset metadata")
+    @CommandLine.Parameters(index = "0")
     String metadataFile;
 
     void create() {

@@ -96,10 +96,10 @@ ocean-cli tokens transfer 0x123 5
 # Creates an asset (DONE)
 ocean-cli assets create --title title --dateCreated 2019 --author aitor --license CC-BY --contentType text/csv --price 10 --url https://raw.githubusercontent.com/oceanprotocol/OEPs/master/8/README.md
 
-# Imports an asset from a JSON file
+# Imports an asset from a JSON file (DONE)
 ocean-cli assets import metadata.json
 
-# Resolves a did
+# Resolves a did (DONE)
 ocean-cli assets resolve did:op:123
 
 # Search for assets
