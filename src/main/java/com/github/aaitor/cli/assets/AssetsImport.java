@@ -36,7 +36,7 @@ public class AssetsImport implements Runnable {
     @CommandLine.Parameters(index = "0")
     String metadataFile;
 
-    void create() {
+    void importAsset() {
         try {
             log.info("Importing asset");
 
@@ -61,6 +61,6 @@ public class AssetsImport implements Runnable {
 
     @Override
     public void run() {
-        create();
+        importAsset();
     }
 }

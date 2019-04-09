@@ -31,12 +31,12 @@ public class AssetsSearch implements Runnable {
     String query;
 
     @CommandLine.Option(names = { "-o", "--offset" }, required = false, description = "search offset")
-    int offset= 1;
+    int offset= 10;
 
     @CommandLine.Option(names = { "-p", "--page" }, required = false, description = "page to show")
     int page= 1;
 
-    void resolve() {
+    void search() {
         try {
             log.info("Searching " + query);
 
@@ -64,6 +64,6 @@ public class AssetsSearch implements Runnable {
 
     @Override
     public void run() {
-        resolve();
+        search();
     }
 }

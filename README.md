@@ -102,14 +102,14 @@ ocean-cli assets import metadata.json
 # Resolves a did (DONE)
 ocean-cli assets resolve did:op:123
 
-# Search for assets
+# Search for assets (DONE)
 ocean-cli assets search query
 
 # Order
-ocean-cli assets order did:op:123
+ocean-cli assets order did:op:123 (DONE)
 
 # Consume
-ocean-cli assets consume did:op:123
+ocean-cli assets consume did:op:123 (DONE)
 ```
 
 
