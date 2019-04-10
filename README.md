@@ -6,6 +6,19 @@
 ---
 
 
+Table of Contents
+=================
+
+   * [Ocean Command Line Interface (Ocean CLI)](#ocean-command-line-interface-ocean-cli)
+      * [Features](#features)
+         * [Compiling](#compiling)
+         * [Installation](#installation)
+         * [Running Ocean CLI](#running-ocean-cli)
+            * [Connecting to a different network](#connecting-to-a-different-network)
+            * [Using a different logging config file](#using-a-different-logging-config-file)
+      * [License](#license)
+
+
 ---
 
 ## Features
@@ -115,8 +128,6 @@ ocean-cli assets consume did:op:123 (DONE)
 
 ## License
 
-This library is a **personal project** implemented for fun.
-It's not created or related in any way with the Ocean Protocol Foundation.
 
 ```
 

@@ -13,7 +13,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: info.picocli:picocli:3.9.5" level="project" />
-    <orderEntry type="library" name="Maven: com.oceanprotocol:squid:0.4.3" level="project" />
+    <orderEntry type="library" name="Maven: com.oceanprotocol:squid:0.4.4" level="project" />
     <orderEntry type="library" name="Maven: org.web3j:core:4.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.web3j:abi:4.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.web3j:crypto:4.1.1" level="project" />
