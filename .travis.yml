@@ -17,7 +17,7 @@ before_install:
 #- echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
 
 install:
-- mvn --settings .maven.xml install -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
+- mvn install -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
 - mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]'
 - export project_version=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
 
@@ -39,7 +39,7 @@ deploy:
 
 - provider: script
   skip_cleanup: true
-  script: mvn clean deploy --settings .maven.xml -B -U -Prelease
+  script: mvn clean deploy -B -U -Prelease
   on:
     tags: true
     all_branches: true
