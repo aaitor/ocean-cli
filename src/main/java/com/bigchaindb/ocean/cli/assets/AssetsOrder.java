@@ -1,6 +1,8 @@
 package com.bigchaindb.ocean.cli.assets;
 
 import com.bigchaindb.ocean.cli.AssetsCLI;
+import com.bigchaindb.ocean.cli.model.CommandResult;
+import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
 import com.oceanprotocol.squid.exceptions.DIDFormatException;
 import com.oceanprotocol.squid.exceptions.OrderException;
 import com.oceanprotocol.squid.models.DID;
@@ -10,10 +12,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 
+import java.util.concurrent.Callable;
+
 @CommandLine.Command(
         name = "order",
         description = "Order an asset given DID")
-public class AssetsOrder implements Runnable {
+public class AssetsOrder implements Callable {
 
     private static final Logger log = LogManager.getLogger(AssetsOrder.class);
 
@@ -30,46 +34,42 @@ public class AssetsOrder implements Runnable {
     @CommandLine.Option(names = { "-s", "--serviceDefinitionId" }, required = false, description = "service definition id to order")
     String serviceDefinitionId= "0";
 
-    void order() {
+    CommandResult order() throws CLIException {
+
+        OrderResult orderResult;
         try {
-            log.info("Ordering did " + did);
+            System.out.println("Ordering did " + did);
+
+            parent.cli.progressBar.start();
 
             DID assetDid= new DID(did);
 
             Flowable<OrderResult> response = parent.cli.getOceanAPI().getAssetsAPI()
                     .order(assetDid, serviceDefinitionId);
 
-            OrderResult orderResult = response.blockingFirst();
+            orderResult = response.blockingFirst();
 
             if (null == orderResult.getServiceAgreementId()) {
-                log.error("Unable to initialize order");
-                return;
+                throw new CLIException("Unable to initialize order");
             }
 
             if (orderResult.isAccessGranted())
-                log.info("Access Granted. ServiceAgreementId: " + orderResult.getServiceAgreementId());
+                System.out.println("Access Granted. ServiceAgreementId: " + orderResult.getServiceAgreementId());
             else
-                log.error("Access Not Granted. ServiceAgreementId: " + orderResult.getServiceAgreementId());
+                throw new CLIException("Access Not Granted. ServiceAgreementId: " + orderResult.getServiceAgreementId());
 
 
         } catch (DIDFormatException | OrderException e) {
-            log.error(e.getMessage());
+            throw new CLIException(e.getMessage());
+        } finally {
+            parent.cli.progressBar.doStop();
         }
-    }
-/*
+        return CommandResult.successResult().setResult(orderResult);
 
-    private AccessService getAccessService(String serviceDefinitionId) throws ServiceException {
-        for (Service service: services) {
-            if (service.serviceDefinitionId.equals(serviceDefinitionId) && service.type.equals(Service.serviceTypes.Access.toString())) {
-                return (AccessService) service;
-            }
-        }
-        throw new ServiceException("Access Service with serviceDefinitionId=" + serviceDefinitionId + " not found");
     }
-*/
 
     @Override
-    public void run() {
-        order();
+    public CommandResult call() throws CLIException {
+        return order();
     }
 }

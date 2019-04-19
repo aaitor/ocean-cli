@@ -1,6 +1,8 @@
 package com.bigchaindb.ocean.dto;
 
+import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
 import com.bigchaindb.ocean.cli.utils.Constants;
+import com.bigchaindb.ocean.cli.utils.ProgressBar;
 import com.oceanprotocol.squid.api.OceanAPI;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -8,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.Properties;
 
 public class SquidBase {
 
@@ -18,12 +21,14 @@ public class SquidBase {
     private String networkName;
     private OceanAPI oceanAPI;
 
+    public ProgressBar progressBar= new ProgressBar();
 
-    public SquidBase() {
+    public SquidBase() throws CLIException {
         try {
             mainConfig=  ConfigFactory.load();
         } catch (Exception e) {
             log.error("Unable load the main config file: " + e.getMessage());
+            throw new CLIException("Unable load the main config file: " + e.getMessage());
         }
 
         try {
@@ -37,10 +42,13 @@ public class SquidBase {
             }
 
             networkConfig= ConfigFactory.parseFile(new File(networkFile));
-            oceanAPI = OceanAPI.getInstance(networkConfig);
+            oceanAPI = OceanAPI.getInstance(joinConfig(networkConfig, mainConfig));
+
+            progressBar.setSpinner(mainConfig.getInt("spinner.id"));
 
         } catch (Exception e) {
             log.error("Unable to initialize Ocean connections: " + e.getMessage());
+            throw new CLIException("Unable to initialize Ocean connections: " + e.getMessage());
         }
     }
 
@@ -61,6 +69,11 @@ public class SquidBase {
         return configFile.exists();
     }
 
-
+    private static Properties joinConfig(Config c1, Config c2) {
+        Properties properties = new Properties();
+        c1.entrySet().forEach(e -> properties.setProperty(e.getKey(), c1.getString(e.getKey())));
+        c2.entrySet().forEach(e -> properties.setProperty(e.getKey(), c2.getString(e.getKey())));
+        return properties;
+    }
 
 }

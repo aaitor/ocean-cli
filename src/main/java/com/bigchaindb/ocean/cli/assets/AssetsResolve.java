@@ -1,23 +1,23 @@
 package com.bigchaindb.ocean.cli.assets;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.bigchaindb.ocean.cli.AssetsCLI;
+import com.bigchaindb.ocean.cli.model.CommandResult;
+import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
 import com.bigchaindb.ocean.cli.utils.CommandLineUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.oceanprotocol.squid.exceptions.DDOException;
 import com.oceanprotocol.squid.exceptions.DIDFormatException;
 import com.oceanprotocol.squid.exceptions.EthereumException;
 import com.oceanprotocol.squid.models.DDO;
 import com.oceanprotocol.squid.models.DID;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
+
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "resolve",
         description = "Resolve an asset using a given DID")
-public class AssetsResolve implements Runnable {
-
-    private static final Logger log = LogManager.getLogger(AssetsResolve.class);
+public class AssetsResolve implements Callable {
 
     @CommandLine.ParentCommand
     AssetsCLI parent;
@@ -29,22 +29,29 @@ public class AssetsResolve implements Runnable {
     @CommandLine.Parameters(index = "0")
     String did;
 
-    void resolve() {
-        try {
-            log.info("Resolving did " + did);
+    CommandResult resolve() throws CLIException {
 
-            DDO ddo = parent.cli.getOceanAPI().getAssetsAPI()
+        DDO ddo;
+        try {
+            System.out.println("Resolving " + did);
+
+            parent.cli.progressBar.start();
+
+            ddo = parent.cli.getOceanAPI().getAssetsAPI()
                     .resolve(new DID(did));
 
             System.out.println(CommandLineUtils.prettyJson(ddo.getMetadataService().toJson()));
 
         } catch (DDOException | DIDFormatException | EthereumException | JsonProcessingException e) {
-            log.error(e.getMessage());
+            throw new CLIException("Error resolving DDO: " + e.getMessage());
+        } finally {
+            parent.cli.progressBar.doStop();
         }
+        return CommandResult.successResult().setResult(ddo);
     }
 
     @Override
-    public void run() {
-        resolve();
+    public Object call() throws CLIException {
+        return resolve();
     }
 }

@@ -1,6 +1,5 @@
 # Ocean Command Line Interface (Ocean CLI)
 
-
 > 🦑 Ocean Protocol Command Line Interface (CLI) powered by Squid Java
 
 ---
