@@ -122,6 +122,18 @@ ocean-cli assets order did:op:123 (DONE)
 
 # Consume
 ocean-cli assets consume did:op:123 (DONE)
+
+# Get Keeper Smart Contracts
+ocean-cli keeper list (DONE)
+
+# Get Smart Contract methods
+ocean-cli keeper describe OceanToken (DONE)
+
+# Call Contract method
+ocean-cli keeper exec OceanToken request 1
+
+# Get resource remote information
+ocean-cli utils info http://xxx.com/file.zip
 ```
 
 

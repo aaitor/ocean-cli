@@ -1,9 +1,6 @@
 package com.bigchaindb.ocean;
 
-import com.bigchaindb.ocean.cli.AccountsCLI;
-import com.bigchaindb.ocean.cli.AssetsCLI;
-import com.bigchaindb.ocean.cli.ConfigCLI;
-import com.bigchaindb.ocean.cli.TokensCLI;
+import com.bigchaindb.ocean.cli.*;
 import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
 import com.bigchaindb.ocean.dto.SquidBase;
 import picocli.CommandLine;
@@ -14,7 +11,7 @@ import java.util.concurrent.Callable;
 
 @Command(name = "ocean-cli",
         versionProvider = OceanCLI.SquidVersionProvider.class,
-        version = "OceanCLI v0.0.1",
+        version = "OceanCLI v0.0.2",
         description = "Prints usage help and version help when requested.%n",
         header = {
                 "@|blue ~ Welcome to Ocean CLI ~\n" +
@@ -24,7 +21,8 @@ import java.util.concurrent.Callable;
             ConfigCLI.class,
             AccountsCLI.class,
             TokensCLI.class,
-            AssetsCLI.class
+            AssetsCLI.class,
+            KeeperCLI.class
         })
 public class OceanCLI extends SquidBase implements Callable {
 

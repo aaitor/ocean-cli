@@ -1,4 +1,4 @@
-package com.bigchaindb.ocean.cli.assets;
+package com.bigchaindb.ocean.cli;
 
 import com.bigchaindb.ocean.cli.model.CommandResult;
 import com.bigchaindb.ocean.OceanCLI;
