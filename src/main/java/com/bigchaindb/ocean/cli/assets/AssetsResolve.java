@@ -3,7 +3,7 @@ package com.bigchaindb.ocean.cli.assets;
 import com.bigchaindb.ocean.cli.AssetsCLI;
 import com.bigchaindb.ocean.cli.model.CommandResult;
 import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
-import com.bigchaindb.ocean.cli.utils.CommandLineUtils;
+import com.bigchaindb.ocean.cli.helpers.CommandLineHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.oceanprotocol.squid.exceptions.DDOException;
 import com.oceanprotocol.squid.exceptions.DIDFormatException;
@@ -40,7 +40,7 @@ public class AssetsResolve implements Callable {
             ddo = parent.cli.getOceanAPI().getAssetsAPI()
                     .resolve(new DID(did));
 
-            System.out.println(CommandLineUtils.prettyJson(ddo.getMetadataService().toJson()));
+            System.out.println(CommandLineHelper.prettyJson(ddo.getMetadataService().toJson()));
 
         } catch (DDOException | DIDFormatException | EthereumException | JsonProcessingException e) {
             throw new CLIException("Error resolving DDO: " + e.getMessage());

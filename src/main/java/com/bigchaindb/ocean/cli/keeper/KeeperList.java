@@ -3,11 +3,10 @@ package com.bigchaindb.ocean.cli.keeper;
 import com.bigchaindb.ocean.cli.KeeperCLI;
 import com.bigchaindb.ocean.cli.model.CommandResult;
 import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
-import com.bigchaindb.ocean.cli.utils.KeeperReflections;
+import com.bigchaindb.ocean.cli.helpers.KeeperReflections;
 import picocli.CommandLine;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(

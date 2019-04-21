@@ -8,7 +8,7 @@ import picocli.CommandLine;
 
 import java.math.BigInteger;
 
-import static com.bigchaindb.ocean.cli.utils.Constants.TransactionSuccess;
+import static com.bigchaindb.ocean.cli.helpers.Constants.TransactionSuccess;
 
 @CommandLine.Command(
         name = "request",

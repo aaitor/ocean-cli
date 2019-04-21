@@ -1,7 +1,7 @@
 package com.bigchaindb.ocean.cli.config;
 
 import com.bigchaindb.ocean.cli.ConfigCLI;
-import com.bigchaindb.ocean.cli.utils.Constants;
+import com.bigchaindb.ocean.cli.helpers.Constants;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

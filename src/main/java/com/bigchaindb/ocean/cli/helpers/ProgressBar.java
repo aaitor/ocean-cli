@@ -1,4 +1,4 @@
-package com.bigchaindb.ocean.cli.utils;
+package com.bigchaindb.ocean.cli.helpers;
 
 public class ProgressBar extends Thread {
 
