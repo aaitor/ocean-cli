@@ -1,12 +1,10 @@
 package com.bigchaindb.ocean.cli;
 
-import com.bigchaindb.ocean.cli.model.CommandResult;
+import com.bigchaindb.ocean.cli.models.CommandResult;
 import com.bigchaindb.ocean.OceanCLI;
-import com.bigchaindb.ocean.cli.CLITestingHelper;
-import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.oceanprotocol.squid.models.DDO;
 import com.oceanprotocol.squid.models.asset.OrderResult;
-import org.junit.Before;
 import org.junit.Test;
 import picocli.CommandLine;
 

@@ -1,8 +1,8 @@
-package com.bigchaindb.ocean.cli.assets;
+package com.bigchaindb.ocean.cli.modules.assets;
 
 import com.bigchaindb.ocean.cli.AssetsCLI;
-import com.bigchaindb.ocean.cli.model.CommandResult;
-import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
+import com.bigchaindb.ocean.cli.models.CommandResult;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.oceanprotocol.squid.exceptions.DDOException;
 import com.oceanprotocol.squid.models.DDO;
 import com.oceanprotocol.squid.models.asset.AssetMetadata;

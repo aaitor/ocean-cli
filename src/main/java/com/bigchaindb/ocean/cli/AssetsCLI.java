@@ -1,7 +1,7 @@
 package com.bigchaindb.ocean.cli;
 
 import com.bigchaindb.ocean.OceanCLI;
-import com.bigchaindb.ocean.cli.assets.*;
+import com.bigchaindb.ocean.cli.modules.assets.*;
 import com.bigchaindb.ocean.cli.helpers.Constants;
 import com.oceanprotocol.squid.models.service.ProviderConfig;
 import picocli.CommandLine;

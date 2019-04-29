@@ -1,20 +1,18 @@
 package com.bigchaindb.ocean.cli;
 
 import com.bigchaindb.ocean.OceanCLI;
-import com.bigchaindb.ocean.cli.modules.keeper.KeeperDescribe;
-import com.bigchaindb.ocean.cli.modules.keeper.KeeperList;
 import picocli.CommandLine;
+import com.bigchaindb.ocean.cli.modules.utils.UtilsInfo;
 
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        name = "keeper",
+        name = "utils",
         subcommands = {
-                KeeperList.class,
-                KeeperDescribe.class
+                UtilsInfo.class
         },
-        description = "Keeper Smart Contracts interface")
-public class KeeperCLI implements Callable {
+        description = "Utils interface")
+public class UtilsCLI implements Callable {
 
     @CommandLine.ParentCommand
     public OceanCLI cli;

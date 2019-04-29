@@ -17,8 +17,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <final-name>ocean-cli</final-name>
 
-        <ocean.squid.version>0.4.4</ocean.squid.version>
-
+        <ocean.squid.version>0.4.5</ocean.squid.version>
         <picocli.version>3.9.5</picocli.version>
 		<log4j.version>2.11.1</log4j.version>
 		<junit.version>4.12</junit.version>
@@ -44,6 +43,25 @@
             <groupId>com.oceanprotocol</groupId>
             <artifactId>squid</artifactId>
             <version>${ocean.squid.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-httpclient</groupId>
+                    <artifactId>commons-httpclient</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- HTTP Client -->
+
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
         </dependency>
 
         <!-- Logging -->
@@ -58,17 +76,10 @@
             <artifactId>log4j-api</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j18-impl</artifactId>
+            <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
         </dependency>
 
         <!-- Config dependency -->
@@ -77,13 +88,6 @@
             <artifactId>config</artifactId>
             <version>${typesafe-config.version}</version>
         </dependency>
-
-        <!-- Java Reflections -->
-<!--        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>${reflections.version}</version>
-        </dependency>-->
 
         <!-- TEST Dependencies-->
         <!-- Junit -->

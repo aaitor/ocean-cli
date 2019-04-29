@@ -1,4 +1,4 @@
-package com.bigchaindb.ocean.cli.accounts;
+package com.bigchaindb.ocean.cli.modules.accounts;
 
 import com.bigchaindb.ocean.cli.AccountsCLI;
 import com.oceanprotocol.squid.exceptions.EthereumException;

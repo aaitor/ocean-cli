@@ -1,7 +1,7 @@
 package com.bigchaindb.ocean;
 
 import com.bigchaindb.ocean.cli.*;
-import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.bigchaindb.ocean.dto.SquidBase;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
             AccountsCLI.class,
             TokensCLI.class,
             AssetsCLI.class,
+            UtilsCLI.class,
             KeeperCLI.class
         })
 public class OceanCLI extends SquidBase implements Callable {

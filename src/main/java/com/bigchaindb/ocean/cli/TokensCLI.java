@@ -1,7 +1,7 @@
 package com.bigchaindb.ocean.cli;
 
-import com.bigchaindb.ocean.cli.tokens.TokensRequest;
-import com.bigchaindb.ocean.cli.tokens.TokensTransfer;
+import com.bigchaindb.ocean.cli.modules.tokens.TokensRequest;
+import com.bigchaindb.ocean.cli.modules.tokens.TokensTransfer;
 import com.bigchaindb.ocean.OceanCLI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

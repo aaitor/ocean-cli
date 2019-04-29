@@ -1,6 +1,6 @@
 package com.bigchaindb.ocean.dto;
 
-import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.bigchaindb.ocean.cli.helpers.Constants;
 import com.bigchaindb.ocean.cli.helpers.ProgressBar;
 import com.oceanprotocol.squid.api.OceanAPI;

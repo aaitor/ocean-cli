@@ -1,4 +1,4 @@
-package com.bigchaindb.ocean.cli.tokens;
+package com.bigchaindb.ocean.cli.modules.tokens;
 
 import com.bigchaindb.ocean.cli.TokensCLI;
 import com.oceanprotocol.squid.exceptions.EthereumException;
@@ -11,11 +11,11 @@ import java.math.BigInteger;
 import static com.bigchaindb.ocean.cli.helpers.Constants.TransactionSuccess;
 
 @CommandLine.Command(
-        name = "transfer",
-        description = "Transfer TokensCLI between accounts")
-public class TokensTransfer implements Runnable {
+        name = "request",
+        description = "Request some TokensCLI")
+public class TokensRequest implements Runnable {
 
-    private static final Logger log = LogManager.getLogger(TokensTransfer.class);
+    private static final Logger log = LogManager.getLogger(TokensRequest.class);
 
     @CommandLine.ParentCommand
     TokensCLI parent;
@@ -24,19 +24,16 @@ public class TokensTransfer implements Runnable {
     CommandLine.Model.CommandSpec spec;
 
     @CommandLine.Parameters(index = "0")
-    String receiverAddress;
+    BigInteger numberTokens;
 
-    @CommandLine.Parameters(index = "1")
-    BigInteger drops;
-
-    void transfer() {
+    void request() {
         try {
-            log.info("Transfering " + drops.longValue() +
-                    " drops from " + parent.cli.getOceanAPI().getMainAccount().getAddress() +
-                    " to " + receiverAddress);
+            log.info("Requesting " + numberTokens.longValue() +
+                    " tokens for " + parent.cli.getOceanAPI().getMainAccount().getAddress() +
+                    " address");
 
             String status= parent.cli.getOceanAPI().getTokensAPI()
-                    .transfer(receiverAddress, drops)
+                    .request(numberTokens)
                     .getStatus();
 
             if (status.equals(TransactionSuccess))
@@ -48,6 +45,6 @@ public class TokensTransfer implements Runnable {
 
     @Override
     public void run() {
-        transfer();
+        request();
     }
 }

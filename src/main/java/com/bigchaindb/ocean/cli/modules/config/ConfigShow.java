@@ -1,4 +1,4 @@
-package com.bigchaindb.ocean.cli.config;
+package com.bigchaindb.ocean.cli.modules.config;
 
 import com.bigchaindb.ocean.cli.ConfigCLI;
 import org.apache.logging.log4j.LogManager;

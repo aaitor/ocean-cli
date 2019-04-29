@@ -1,8 +1,8 @@
-package com.bigchaindb.ocean.cli.keeper;
+package com.bigchaindb.ocean.cli.modules.keeper;
 
 import com.bigchaindb.ocean.cli.KeeperCLI;
-import com.bigchaindb.ocean.cli.model.CommandResult;
-import com.bigchaindb.ocean.cli.model.exceptions.CLIException;
+import com.bigchaindb.ocean.cli.models.CommandResult;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.bigchaindb.ocean.cli.helpers.KeeperReflections;
 import picocli.CommandLine;
 

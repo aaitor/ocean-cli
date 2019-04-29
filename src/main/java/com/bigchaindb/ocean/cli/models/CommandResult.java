@@ -1,4 +1,4 @@
-package com.bigchaindb.ocean.cli.model;
+package com.bigchaindb.ocean.cli.models;
 
 import com.oceanprotocol.squid.models.AbstractModel;
 

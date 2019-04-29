@@ -1,6 +1,6 @@
-package com.bigchaindb.ocean.cli.model.exceptions;
+package com.bigchaindb.ocean.cli.models.exceptions;
 
-import com.bigchaindb.ocean.cli.assets.AssetsSearch;
+import com.bigchaindb.ocean.cli.modules.assets.AssetsSearch;
 import com.oceanprotocol.squid.exceptions.OceanException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
