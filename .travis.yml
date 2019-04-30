@@ -4,43 +4,36 @@ jdk:
 - openjdk11
 
 sudo: false
-
 services:
 - docker
-
 cache:
   directories:
   - "$HOME/.cache"
-
-before_install:
-#- echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
-#- echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
-
+before_install: 
 install:
 - mvn install -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
 - mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]'
-- export project_version=$(mvn help:evaluate -Dexpression=project.version | grep -e '^[^\[]')
-
-script:
-
-after_success:
-
+- export project_version=$(mvn help:evaluate -Dexpression=project.version | grep -e
+  '^[^\[]')
+script: 
+after_success: 
 deploy:
 - provider: releases
   skip_cleanup: true
   api_key:
-    secure: "SUMtbqHpj2Fvf6wM8wTMhj4T8Y6p86w4Ivq/3prSGapAe6BhHo+p2TUbRszTX66psrbkeBPp99Vc+sCWS5Rnz1bGVVrWzDA8sDzWHa/uiUZsuqXu1t4DbTtvhc6JKNN28px5f9vI01Q+FZ9gGhnNTtSIOn5pG+sxPJ4/7hZwBA7JGd74hyDdtX2lChHaM4wMk0vBivT5kZMwlKuuoFgWYaE1oemEFLOPJhmM5ORELB8d+jzCwr8XcUyA2gKHCRuCVEhPhFmLTwaycxiVa04VRNmHhBI7ux9F2YNthR/aSap3A9ud4kET0FCkmUoyi/Q/+o0PlWBsc8hmeprcG+llQYirNMXplZUpzQR4Uwy3VXrESG7KlCTSQ43zObNXROLzGx8qMTnQUdFb72sq9gc07tGQHc1rDNHnzqkNF08BvdZS4wsInmaBrlqXzzMarD1XgcR9UoUZm3BJu87DdVp4NXJCNGe2FMmaWWzcEwbFzbInrYIrN2kmzNOFUPYwLgMhLJ6ulYrePXo7lGDeQ71NV/DXccRw5kLgJ/Y+kOS5rbVvPiAuEODob5cDnLMXFZ6rsNFygZTu1/d2iQIY/TBjUawKuYXAHeMHu2B8YIEWLCg3Kc4NgNSvV8fVgw58NJkxI8IyIhd73cbE8GG/ll7zDm3uFhi1BmKi/7K8JNczv1c="
+    secure: SUMtbqHpj2Fvf6wM8wTMhj4T8Y6p86w4Ivq/3prSGapAe6BhHo+p2TUbRszTX66psrbkeBPp99Vc+sCWS5Rnz1bGVVrWzDA8sDzWHa/uiUZsuqXu1t4DbTtvhc6JKNN28px5f9vI01Q+FZ9gGhnNTtSIOn5pG+sxPJ4/7hZwBA7JGd74hyDdtX2lChHaM4wMk0vBivT5kZMwlKuuoFgWYaE1oemEFLOPJhmM5ORELB8d+jzCwr8XcUyA2gKHCRuCVEhPhFmLTwaycxiVa04VRNmHhBI7ux9F2YNthR/aSap3A9ud4kET0FCkmUoyi/Q/+o0PlWBsc8hmeprcG+llQYirNMXplZUpzQR4Uwy3VXrESG7KlCTSQ43zObNXROLzGx8qMTnQUdFb72sq9gc07tGQHc1rDNHnzqkNF08BvdZS4wsInmaBrlqXzzMarD1XgcR9UoUZm3BJu87DdVp4NXJCNGe2FMmaWWzcEwbFzbInrYIrN2kmzNOFUPYwLgMhLJ6ulYrePXo7lGDeQ71NV/DXccRw5kLgJ/Y+kOS5rbVvPiAuEODob5cDnLMXFZ6rsNFygZTu1/d2iQIY/TBjUawKuYXAHeMHu2B8YIEWLCg3Kc4NgNSvV8fVgw58NJkxI8IyIhd73cbE8GG/ll7zDm3uFhi1BmKi/7K8JNczv1c=
   file:
   - target/ocean-cli-$project_version.jar
   name: "$project_version"
   on:
     tags: true
     all_branches: true
-
 - provider: script
   skip_cleanup: true
   script: mvn clean deploy -B -U -Prelease
   on:
     tags: true
     all_branches: true
-
+env:
+  global:
+  - secure: MAavHPrQZ9GLxzfioWBrbi8yFsp8ALvgy5AF78ltV9fsDZEKzzdEV0GxtVH8INfZ3uuIvZckh23yCECwnHl1mBXlh2g4IkyiEgyCfPBt1Ae3a4bew7eqI6DuH564W7JDjap3bp73ahqNyyIKkdzHu3FI5hRhYOGE2nVEXEl1Dd3dCLCTesqx0jX8z9vce04XPCh6A1OoyEMvXuSls5A4C9U2fSM9Ie0i0j5SN9DZyOyQhcGS50voqnHLfaFCU1vdpxvHh3dU7rTbT3iiUJ52dNCxvGlO4nDMWFmPw5p9RLaxSr+Wd62t0aCbRpD09JcWbV2OPzatGGDGJiiw6QBwflob/p2wh9IaZ7Lcs8gJ5cZHKFliHGc2722jOupDZPtaSvQSIDvnc5AIAPD6PMZywPn4h9sBUss4R7KDHVVmluX2OD3k2JPuatAnAfDK/cB6BDQHC5LYCiZ7xwkWxDIGAyPCfkD717ypUsRb+GnqvpZUoXs2Wc1crzPrE9YFYISZzjbY4foDkwAYwrxkDtVHwYTnm7hY96ijX1i/KAiFAo/yHaQUT6sTjUgGhL6kWanzwTS8OYPSlCREPdHdZ9ZLTPTmiLyCqc/DY+oGjQcyslhzBDVzV6Ps5hgEAf68MulZPskhmchBkcYb3RcJ+XIdKZgeGuF/hM3rQW8diA3h6Us=
