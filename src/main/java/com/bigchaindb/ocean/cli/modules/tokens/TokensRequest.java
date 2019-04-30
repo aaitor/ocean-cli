@@ -15,7 +15,7 @@ import static com.bigchaindb.ocean.cli.helpers.Constants.TransactionSuccess;
 
 @CommandLine.Command(
         name = "request",
-        description = "Request some TokensCLI")
+        description = "Request some Ocean Tokens")
 public class TokensRequest implements Callable {
 
     private static final Logger log = LogManager.getLogger(TokensRequest.class);

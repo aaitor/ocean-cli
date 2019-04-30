@@ -35,14 +35,14 @@ public class AssetsSearch implements Callable {
 
         SearchResult searchResult;
         try {
-            System.out.println("Searching " + query);
+            System.out.println("Searching for: " + query);
 
             parent.cli.progressBar.start();
 
             searchResult= parent.cli.getOceanAPI().getAssetsAPI()
                     .search(query, offset, page);
 
-            System.out.println("Total results: " + searchResult.total_results
+            System.out.println("\nTotal results: " + searchResult.total_results
                     + " - page: " + searchResult.page
                     + " - total pages: " + searchResult.total_pages);
 
@@ -61,9 +61,9 @@ public class AssetsSearch implements Callable {
 
     private void printSimplifiedDDO(DDO ddo)    {
         System.out.println("{" +
-                "\n\tdid: " + ddo.id + ", " +
-                "\n\ttitle:" + ddo.getMetadataService().metadata.base.name  + ", " +
-                "\n\tprice:" + ddo.getMetadataService().metadata.base.price  + " " +
+                "\n\t\"did\": \"" + ddo.id + "\", " +
+                "\n\t\"title\": \"" + ddo.getMetadataService().metadata.base.name  + "\", " +
+                "\n\t\"price\": \"" + ddo.getMetadataService().metadata.base.price  + "\" " +
                 "\n}");
     }
 

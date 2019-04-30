@@ -40,6 +40,7 @@ public class AssetsResolve implements Callable {
             ddo = parent.cli.getOceanAPI().getAssetsAPI()
                     .resolve(new DID(did));
 
+            System.out.println();
             System.out.println(CommandLineHelper.prettyJson(ddo.getMetadataService().toJson()));
 
         } catch (DDOException | DIDFormatException | EthereumException | JsonProcessingException e) {

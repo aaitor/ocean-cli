@@ -27,7 +27,7 @@ public class AssetsCreate implements Callable {
     CommandLine.Model.CommandSpec spec;
 
 
-    // $ ocean-cli assets create --title title --dateCreated 2019
+    // $ ocean-cli assets create --title title --dateCreated 2012-10-10T17:00:000Z
     // --author aitor --license CC-BY --contentType text/csv --price 10
     // --url https://raw.githubusercontent.com/oceanprotocol/OEPs/master/8/README.md
 
@@ -65,6 +65,7 @@ public class AssetsCreate implements Callable {
             ddo = parent.cli.getOceanAPI().getAssetsAPI()
                     .create(assetMetadataBuilder(), parent.serviceEndpointsBuilder());
 
+            System.out.println();
             System.out.println("Asset Created: " + ddo.getDid().toString());
 
         } catch (ParseException e) {

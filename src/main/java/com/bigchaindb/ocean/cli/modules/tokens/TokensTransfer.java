@@ -15,7 +15,7 @@ import static com.bigchaindb.ocean.cli.helpers.Constants.TransactionSuccess;
 
 @CommandLine.Command(
         name = "transfer",
-        description = "Transfer TokensCLI between accounts")
+        description = "Transfer Ocean Token between accounts")
 public class TokensTransfer implements Callable {
 
     private static final Logger log = LogManager.getLogger(TokensTransfer.class);
