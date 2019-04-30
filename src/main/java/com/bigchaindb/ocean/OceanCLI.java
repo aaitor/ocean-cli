@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
         version = "OceanCLI v0.0.2",
         description = "Prints usage help and version help when requested.%n",
         header = {
-                "@|blue ~ Welcome to Ocean CLI ~\n" +
+                "~ Welcome to Ocean CLI ~\n" +
                 ""},
         footer = "\nbuilt by BigchainDB GmbH\n",
         subcommands = {
@@ -49,7 +49,11 @@ public class OceanCLI extends SquidBase implements Callable {
     public static void main(String[] args) {
 
         try {
+            System.out.println();
+
             CommandLine.call(new OceanCLI(), System.err, args);
+
+            System.out.println();
         } catch (CLIException e) {}
     }
 
@@ -61,7 +65,7 @@ public class OceanCLI extends SquidBase implements Callable {
         @Override
         public String[] getVersion() throws Exception {
             return new String[] {
-                    "@|blue OceanCLI|@ v0.0.1"
+                    "OceanCLI v0.0.2"
                             //+ "OceanController: " + parent.oceanController.toString()
 
             };
