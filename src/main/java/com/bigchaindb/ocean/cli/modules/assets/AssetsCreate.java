@@ -1,11 +1,11 @@
-package com.bigchaindb.ocean.cli.assets;
+package com.bigchaindb.ocean.cli.modules.assets;
 
 import com.bigchaindb.ocean.cli.AssetsCLI;
+import com.bigchaindb.ocean.cli.models.CommandResult;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.oceanprotocol.squid.exceptions.DDOException;
 import com.oceanprotocol.squid.models.DDO;
 import com.oceanprotocol.squid.models.asset.AssetMetadata;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 
 import java.math.BigInteger;
@@ -13,13 +13,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "create",
         description = "Create an Asset")
-public class AssetsCreate implements Runnable {
-
-    private static final Logger log = LogManager.getLogger(AssetsCreate.class);
+public class AssetsCreate implements Callable {
 
     @CommandLine.ParentCommand
     AssetsCLI parent;
@@ -28,7 +27,7 @@ public class AssetsCreate implements Runnable {
     CommandLine.Model.CommandSpec spec;
 
 
-    // $ ocean-cli assets create --title title --dateCreated 2019
+    // $ ocean-cli assets create --title title --dateCreated 2012-10-10T17:00:000Z
     // --author aitor --license CC-BY --contentType text/csv --price 10
     // --url https://raw.githubusercontent.com/oceanprotocol/OEPs/master/8/README.md
 
@@ -55,21 +54,29 @@ public class AssetsCreate implements Runnable {
     @CommandLine.Option(names = { "-u", "--url" }, required = true, description = "the asset url")
     String url;
 
-    void create() {
-        try {
-            log.info("Creating a new asset");
+    CommandResult create() throws CLIException {
 
-            DDO ddo = parent.cli.getOceanAPI().getAssetsAPI()
+        DDO ddo;
+        try {
+            System.out.println("Creating a new asset");
+
+            parent.cli.progressBar.start();
+
+            ddo = parent.cli.getOceanAPI().getAssetsAPI()
                     .create(assetMetadataBuilder(), parent.serviceEndpointsBuilder());
 
+            System.out.println();
             System.out.println("Asset Created: " + ddo.getDid().toString());
 
         } catch (ParseException e) {
-            log.error("Error parsing date. Expected format: " + DDO.DATE_PATTERN);
-            log.error(e.getMessage());
+            throw new CLIException("Error parsing date. Expected format: " + DDO.DATE_PATTERN + "\n" + e.getMessage());
         } catch (DDOException e) {
-            log.error(e.getMessage());
+            throw new CLIException("Error with DDO " + e.getMessage());
+        } finally {
+            parent.cli.progressBar.doStop();
         }
+
+        return CommandResult.successResult().setResult(ddo);
     }
 
     AssetMetadata assetMetadataBuilder() throws ParseException {
@@ -92,8 +99,9 @@ public class AssetsCreate implements Runnable {
         return metadata;
     }
 
+
     @Override
-    public void run() {
-        create();
+    public Object call() throws CLIException {
+        return create();
     }
 }

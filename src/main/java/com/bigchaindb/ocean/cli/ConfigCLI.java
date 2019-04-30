@@ -1,8 +1,8 @@
 package com.bigchaindb.ocean.cli;
 
-import com.bigchaindb.ocean.cli.config.ConfigClean;
+import com.bigchaindb.ocean.cli.modules.config.ConfigClean;
 import com.bigchaindb.ocean.OceanCLI;
-import com.bigchaindb.ocean.cli.config.ConfigShow;
+import com.bigchaindb.ocean.cli.modules.config.ConfigShow;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;

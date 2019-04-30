@@ -1,4 +1,4 @@
-package com.bigchaindb.ocean.cli.config;
+package com.bigchaindb.ocean.cli.modules.config;
 
 import com.bigchaindb.ocean.cli.ConfigCLI;
 import org.apache.logging.log4j.LogManager;
@@ -16,12 +16,13 @@ public class ConfigShow implements Runnable {
     ConfigCLI parent;
 
     void showConfig() {
-        log.info("Main config:");
+        System.out.println("Main config:");
+
         parent.cli.getMainConfig().entrySet().forEach(e ->{
             System.out.println("  " + e.getKey() + ": " + e.getValue().render());
         });
 
-        log.info("Network config:");
+        System.out.println("Network config:");
         parent.cli.getNetworkConfig().entrySet().forEach(e -> {
             System.out.println("  " + e.getKey() + ": " + e.getValue().render());
         });

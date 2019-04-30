@@ -1,6 +1,8 @@
-package com.bigchaindb.ocean.cli.assets;
+package com.bigchaindb.ocean.cli.modules.assets;
 
+import com.bigchaindb.ocean.cli.models.CommandResult;
 import com.bigchaindb.ocean.cli.AssetsCLI;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.oceanprotocol.squid.exceptions.DDOException;
 import com.oceanprotocol.squid.models.DDO;
@@ -12,11 +14,12 @@ import picocli.CommandLine;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "import",
         description = "Import an asset using the metadata in JSON format ")
-public class AssetsImport implements Runnable {
+public class AssetsImport implements Callable {
 
     private static final Logger log = LogManager.getLogger(AssetsImport.class);
 
@@ -29,21 +32,28 @@ public class AssetsImport implements Runnable {
     @CommandLine.Parameters(index = "0")
     String metadataFile;
 
-    void importAsset() {
-        try {
-            log.info("Importing asset");
+    CommandResult importAsset() throws CLIException {
 
-            DDO ddo = parent.cli.getOceanAPI().getAssetsAPI()
+        DDO ddo;
+        try {
+            System.out.println("Importing asset using file " + metadataFile);
+
+            parent.cli.progressBar.start();
+
+            ddo = parent.cli.getOceanAPI().getAssetsAPI()
                     .create(assetMetadataBuilder(metadataFile), parent.serviceEndpointsBuilder());
 
             System.out.println("Asset Created: " + ddo.getDid().toString());
 
         } catch (IOException e) {
-            log.error("Error parsing metadata");
-            log.error(e.getMessage());
+            throw new CLIException("Error parsing metadata " + e.getMessage());
         } catch (DDOException e) {
-            log.error(e.getMessage());
+            throw new CLIException("Error with DDO " + e.getMessage());
+        } finally {
+            parent.cli.progressBar.doStop();
         }
+        return CommandResult.successResult().setResult(ddo);
+
     }
 
 
@@ -53,7 +63,7 @@ public class AssetsImport implements Runnable {
     }
 
     @Override
-    public void run() {
-        importAsset();
+    public Object call() throws CLIException {
+        return importAsset();
     }
 }

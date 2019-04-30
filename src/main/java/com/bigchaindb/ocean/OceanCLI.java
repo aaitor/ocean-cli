@@ -1,34 +1,31 @@
 package com.bigchaindb.ocean;
 
-import com.bigchaindb.ocean.cli.AccountsCLI;
-import com.bigchaindb.ocean.cli.AssetsCLI;
-import com.bigchaindb.ocean.cli.ConfigCLI;
-import com.bigchaindb.ocean.cli.TokensCLI;
+import com.bigchaindb.ocean.cli.*;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.bigchaindb.ocean.dto.SquidBase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+
+import java.util.concurrent.Callable;
 
 
 @Command(name = "ocean-cli",
         versionProvider = OceanCLI.SquidVersionProvider.class,
-        version = "OceanCLI v0.0.1",
+        version = "OceanCLI v0.0.2",
         description = "Prints usage help and version help when requested.%n",
         header = {
-                "@|blue ~ Welcome to Ocean CLI ~\n" +
+                "~ Welcome to Ocean CLI ~\n" +
                 ""},
         footer = "\nbuilt by BigchainDB GmbH\n",
         subcommands = {
             ConfigCLI.class,
             AccountsCLI.class,
             TokensCLI.class,
-            AssetsCLI.class
+            AssetsCLI.class,
+            UtilsCLI.class,
+            KeeperCLI.class
         })
-public class OceanCLI extends SquidBase implements Runnable {
-
-
-    private static final Logger log = LogManager.getLogger(OceanCLI.class);
+public class OceanCLI extends SquidBase implements Callable {
 
     @CommandLine.Option(names = { "-h", "--help" },
             usageHelp = true,
@@ -40,13 +37,24 @@ public class OceanCLI extends SquidBase implements Runnable {
             description = "Display version info")
     boolean versionInfoRequested;
 
+    public OceanCLI() throws CLIException {
+    }
+
     @Override
-    public void run() {
+    public Object call() {
         CommandLine.usage(this, System.out);
+        return null;
     }
 
     public static void main(String[] args) {
-        CommandLine.run(new OceanCLI(), System.err, args);
+
+        try {
+            System.out.println();
+
+            CommandLine.call(new OceanCLI(), System.err, args);
+
+            System.out.println();
+        } catch (CLIException e) {}
     }
 
     static class SquidVersionProvider implements CommandLine.IVersionProvider {
@@ -57,7 +65,7 @@ public class OceanCLI extends SquidBase implements Runnable {
         @Override
         public String[] getVersion() throws Exception {
             return new String[] {
-                    "@|blue OceanCLI|@ v0.0.1"
+                    "OceanCLI v0.0.2"
                             //+ "OceanController: " + parent.oceanController.toString()
 
             };

@@ -1,6 +1,5 @@
 # Ocean Command Line Interface (Ocean CLI)
 
-
 > 🦑 Ocean Protocol Command Line Interface (CLI) powered by Squid Java
 
 ---
@@ -107,7 +106,7 @@ ocean-cli tokens request 5
 ocean-cli tokens transfer 0x123 5
 
 # Creates an asset (DONE)
-ocean-cli assets create --title title --dateCreated 2019 --author aitor --license CC-BY --contentType text/csv --price 10 --url https://raw.githubusercontent.com/oceanprotocol/OEPs/master/8/README.md
+ocean-cli assets create --title "test" --dateCreated "2019-10-10T17:00:000Z" --author aitor --license CC-BY --contentType text/csv --price 1 --url https://oceanprotocol.com/tech-whitepaper.pdf
 
 # Imports an asset from a JSON file (DONE)
 ocean-cli assets import metadata.json
@@ -123,6 +122,18 @@ ocean-cli assets order did:op:123 (DONE)
 
 # Consume
 ocean-cli assets consume did:op:123 (DONE)
+
+# Get Keeper Smart Contracts
+ocean-cli keeper list (DONE)
+
+# Get Smart Contract methods
+ocean-cli keeper describe OceanToken (DONE)
+
+# Call Contract method
+ocean-cli keeper exec OceanToken request 1
+
+# Get resource remote information
+ocean-cli utils info http://xxx.com/file.zip
 ```
 
 

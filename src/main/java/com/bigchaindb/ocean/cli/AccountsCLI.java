@@ -1,7 +1,7 @@
 package com.bigchaindb.ocean.cli;
 
-import com.bigchaindb.ocean.cli.accounts.AccountsBalance;
-import com.bigchaindb.ocean.cli.accounts.AccountsList;
+import com.bigchaindb.ocean.cli.modules.accounts.AccountsBalance;
+import com.bigchaindb.ocean.cli.modules.accounts.AccountsList;
 import com.bigchaindb.ocean.OceanCLI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

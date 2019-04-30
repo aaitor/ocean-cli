@@ -1,20 +1,24 @@
 package com.bigchaindb.ocean.cli;
 
-import com.bigchaindb.ocean.cli.assets.*;
-import com.bigchaindb.ocean.cli.utils.Constants;
 import com.bigchaindb.ocean.OceanCLI;
+import com.bigchaindb.ocean.cli.modules.assets.*;
+import com.bigchaindb.ocean.cli.helpers.Constants;
 import com.oceanprotocol.squid.models.service.ProviderConfig;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
+
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "assets",
-        subcommands = {AssetsCreate.class, AssetsImport.class, AssetsResolve.class, AssetsSearch.class, AssetsOrder.class, AssetsConsume.class},
-        description = "Registering of assets in the network")
-public class AssetsCLI implements Runnable {
-
-    private static final Logger log = LogManager.getLogger(AssetsCLI.class);
+        subcommands = {
+                AssetsCreate.class,
+                AssetsImport.class,
+                AssetsResolve.class,
+                AssetsSearch.class,
+                AssetsOrder.class,
+                AssetsConsume.class},
+        description = "Assets handler")
+public class AssetsCLI implements Callable {
 
     @CommandLine.ParentCommand
     public OceanCLI cli;
@@ -24,8 +28,9 @@ public class AssetsCLI implements Runnable {
 
 
     @Override
-    public void run() {
+    public Object call() {
         spec.commandLine().usage(System.out);
+        return null;
     }
 
     public ProviderConfig serviceEndpointsBuilder()  {
