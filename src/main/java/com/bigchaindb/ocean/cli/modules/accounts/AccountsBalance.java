@@ -1,6 +1,8 @@
 package com.bigchaindb.ocean.cli.modules.accounts;
 
 import com.bigchaindb.ocean.cli.AccountsCLI;
+import com.bigchaindb.ocean.cli.models.CommandResult;
+import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.oceanprotocol.squid.exceptions.EthereumException;
 import com.oceanprotocol.squid.models.Account;
 import com.oceanprotocol.squid.models.Balance;
@@ -8,12 +10,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 
-import java.math.BigInteger;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "balance",
         description = "Get the balance of an account")
-public class AccountsBalance implements Runnable {
+public class AccountsBalance implements Callable {
 
     private static final Logger log = LogManager.getLogger(AccountsBalance.class);
 
@@ -26,12 +28,14 @@ public class AccountsBalance implements Runnable {
     @CommandLine.Parameters(index = "0")
     String accountAddress;
 
-    void balance() {
+    CommandResult balance() throws CLIException {
+        Balance balance;
         try {
-            Balance balance = parent.cli.getOceanAPI().getAccountsAPI()
+            System.out.println("Account: " + accountAddress + "\n");
+
+            balance = parent.cli.getOceanAPI().getAccountsAPI()
                     .balance(new Account(accountAddress, null));
 
-            System.out.println("Account: " + accountAddress + "\n");
 
             System.out.println("Balance in current network (" + parent.cli.getMainConfig().getString("network")+ "):"
                     + "\n\tPOA Ether: " + balance.getEth() + " ETH"
@@ -39,11 +43,15 @@ public class AccountsBalance implements Runnable {
 
         } catch (EthereumException e) {
             log.error(e.getMessage());
+            throw new CLIException(e.getMessage());
         }
+
+        return CommandResult.successResult();
+
     }
 
     @Override
-    public void run() {
-        balance();
+    public CommandResult call() throws CLIException {
+        return balance();
     }
 }
