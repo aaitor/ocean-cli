@@ -1,7 +1,14 @@
 History
 =======
 
-0.0.2 (TBD)
+0.0.3 (May, 2019)
+-------------------------
+
+* Allowing to create new accounts
+* CLI auto-configuration
+
+
+0.0.2 (April, 2019)
 -------------------------
 
 * Adapting to Java 11
@@ -9,7 +16,7 @@ History
 * Get remote HTTP resource metadata
 
 
-0.0.1 (March, 2018)
+0.0.1 (March, 2019)
 ------------------
 
 * First release
