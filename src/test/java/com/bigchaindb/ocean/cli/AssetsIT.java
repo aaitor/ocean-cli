@@ -10,7 +10,7 @@ import picocli.CommandLine;
 
 import static org.junit.Assert.*;
 
-public class AssetsIT extends CLITestingHelper {
+public class AssetsIT {
 
 
     @Test
