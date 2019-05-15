@@ -6,24 +6,17 @@ import com.bigchaindb.ocean.cli.helpers.Constants;
 import com.bigchaindb.ocean.cli.models.CommandResult;
 import com.bigchaindb.ocean.cli.models.exceptions.CLIException;
 import com.google.common.base.Charsets;
-import com.oceanprotocol.squid.exceptions.EthereumException;
-import com.typesafe.config.ConfigFactory;
-import com.typesafe.config.ConfigRenderOptions;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.web3j.crypto.CipherException;
 import picocli.CommandLine;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.Properties;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
@@ -88,22 +81,7 @@ public class AccountsNew implements Callable {
                     .replaceAll("account.main.password=\"(.*?)\"", "account.main.password=\""+ password +"\"")
                     .replaceAll("account.main.credentialsFile=\"(.*?)\"", "account.main.credentialsFile=\""+ filePath +"\"");
 
-
             FileUtils.writeStringToFile(new File(Constants.mainConfigFile), newConfigContent, Charsets.UTF_8);
-
-            /*Properties properties = new Properties();
-            parent.cli.getMainConfig().entrySet().forEach(e ->
-                    properties.setProperty(e.getKey(), parent.cli.getMainConfig().getString(e.getKey()))
-            );
-
-            properties.setProperty("account.main.address", address);
-            properties.setProperty("account.main.password", password);
-            properties.setProperty("account.main.credentialsFile", filePath);
-
-            //File targetFile = new File(Constants.mainConfigFile);
-            properties.store(new FileWriter(Constants.mainConfigFile), null);
-*/
-
 
             return true;
         } catch (IOException ex)    {
