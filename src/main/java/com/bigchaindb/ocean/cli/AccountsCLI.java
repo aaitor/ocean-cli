@@ -3,13 +3,14 @@ package com.bigchaindb.ocean.cli;
 import com.bigchaindb.ocean.cli.modules.accounts.AccountsBalance;
 import com.bigchaindb.ocean.cli.modules.accounts.AccountsList;
 import com.bigchaindb.ocean.OceanCLI;
+import com.bigchaindb.ocean.cli.modules.accounts.AccountsNew;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "accounts",
-        subcommands = {AccountsList.class, AccountsBalance.class},
+        subcommands = {AccountsNew.class, AccountsList.class, AccountsBalance.class},
         description = "Allowing to interact with the accounts.")
 public class AccountsCLI implements Runnable {
 
