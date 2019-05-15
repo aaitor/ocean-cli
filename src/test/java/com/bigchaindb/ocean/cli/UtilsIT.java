@@ -8,7 +8,7 @@ import picocli.CommandLine;
 
 import static org.junit.Assert.assertTrue;
 
-public class UtilsIT extends CLITestingHelper {
+public class UtilsIT {
 
 
     @Test

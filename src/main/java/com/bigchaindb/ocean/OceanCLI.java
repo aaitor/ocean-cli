@@ -38,6 +38,7 @@ public class OceanCLI extends SquidBase implements Callable {
     boolean versionInfoRequested;
 
     public OceanCLI() throws CLIException {
+
     }
 
     @Override
