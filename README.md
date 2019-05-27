@@ -34,10 +34,13 @@ You can compile the application using the following command:
 mvn clean package
 ```
 
+Ocean CLI requires Java 11.
+
 ### Installation
 
 After compiling the application, you will see in the target folder a zip file with the config files required.
-Extract the files in the `~/.local/share/ocean-cli` folder of the user home.
+Ocean CLI can setup the config files for you with the default parameters, 
+but also you can extract the config files in the `~/.local/share/ocean-cli` folder.
 
 The final folder should have the following structure:
 
