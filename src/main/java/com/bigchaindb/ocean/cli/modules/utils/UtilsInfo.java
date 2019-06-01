@@ -69,7 +69,7 @@ public class UtilsInfo implements Callable {
             file.contentType= getHeaderIfExists(headers, "Content-Type");
 
         if (null != getHeaderIfExists(headers, "Content-Length"))
-            file.contentLength= getHeaderIfExists(headers, "Content-Length");
+            file.contentLength= Integer.parseInt(getHeaderIfExists(headers, "Content-Length"));
 
         if (null != getHeaderIfExists(headers, "etag"))
             file.contentType= getHeaderIfExists(headers, "etag").replace("\"", "");
