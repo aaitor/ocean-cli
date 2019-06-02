@@ -49,7 +49,7 @@ public class AssetsCreate implements Callable {
     String contentType;
 
     @CommandLine.Option(names = { "-p", "--price" }, required = true, description = "the asset price")
-    BigInteger price;
+    String price;
 
     @CommandLine.Option(names = { "-u", "--url" }, required = true, description = "the asset url")
     String url;
@@ -87,7 +87,7 @@ public class AssetsCreate implements Callable {
         metadata.base.dateCreated= new SimpleDateFormat(DDO.DATE_PATTERN, Locale.ENGLISH).parse(dateCreated);
         metadata.base.author= author;
         metadata.base.license= license;
-        metadata.base.price= price.toString();
+        metadata.base.price= price;
         ArrayList<AssetMetadata.File> files= new ArrayList<>();
         AssetMetadata.File file = new AssetMetadata.File();
         file.index= 0;
