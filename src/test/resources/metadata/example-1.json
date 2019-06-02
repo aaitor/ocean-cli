@@ -20,17 +20,19 @@
               "resourceId": "access-log2018-02-13-15-17-29-18386C502CAEA932"
             }
         ],
-    "links": [{
-      "name": "Sample of Asset Data",
-      "type": "sample",
-      "url": "https://foo.com/sample.csv"
-    }, {
-      "name": "Data Format Definition",
-      "type": "format",
-      "AssetID": "4d517500da0acb0d65a716f61330969334630363ce4a6a9d39691026ac7908ea"
-    }],
+    "links": [
+      {
+        "url": "http://data.ceda.ac.uk/badc/ukcp09/data/gridded-land-obs/gridded-land-obs-daily/"
+      },
+      {
+        "url": "http://data.ceda.ac.uk/badc/ukcp09/data/gridded-land-obs/gridded-land-obs-averages-25km/"
+      },
+      {
+        "url": "http://data.ceda.ac.uk/badc/ukcp09/"
+      }
+    ],
     "inLanguage": "en",
-    "tags": "weather, uk, 2011, temperature, humidity",
+    "tags": ["weather", "uk", "2011", "temperature", "humidity"],
     "price": "10"
 
   },
