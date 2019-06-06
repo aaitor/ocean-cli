@@ -38,11 +38,16 @@ Ocean CLI requires Java 11.
 
 ### Installation
 
-After compiling the application, you will see in the target folder a zip file with the config files required.
-Ocean CLI can setup the config files for you with the default parameters, 
-but also you can extract the config files in the `~/.local/share/ocean-cli` folder.
+After compiling the application, you will see in the `target/` folder a zip file with the config files required.
+Ocean CLI can setup the config files for you with the default parameters,
+but you could also unzip the zip file into the `~/.local/share/ocean-cli` folder, e.g.
 
-The final folder should have the following structure:
+```bash
+cd target
+unzip ocean-cli-*.zip -d ~/.local/share/ocean-cli
+```
+
+The unzipped folder should have the following structure:
 
 ```bash
 $ ls -la ~/.local/share/ocean-cli/
@@ -55,11 +60,11 @@ drwxr-xr-x  2 aitor aitor 4096 Mar 24 20:34 networks
 
 ```
 
-
 ### Running Ocean CLI
 
 This should generate the JAR package in the target folder. You can run the application using the usual way (`java -jar app.jar`). 
 Also, setting up an alias would make quicker and easier to run the application:
+
 ```bash
 alias ocean-cli='java $OCEAN_OPTS -jar target/ocean-cli-*-shaded.jar'
 ```
