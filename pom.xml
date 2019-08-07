@@ -5,7 +5,7 @@
 
 	<groupId>com.bigchaindb.ocean</groupId>
 	<artifactId>ocean-cli</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<packaging>jar</packaging>
 
 	<name>Ocean Protocol CLI</name>
@@ -17,7 +17,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <final-name>ocean-cli</final-name>
 
-        <ocean.squid.version>0.5.1</ocean.squid.version>
+        <ocean.squid.version>0.7</ocean.squid.version>
         <picocli.version>3.9.5</picocli.version>
 		<log4j.version>2.11.1</log4j.version>
 		<junit.version>4.12</junit.version>

@@ -14,8 +14,22 @@ public class AssetsIT {
 
 
     @Test
-    public void assetsImport() throws CLIException {
-        String[] args= {"assets", "import", "src/test/resources/metadata/example-1.json"};
+    public void assetsAccessImport() throws CLIException {
+        String[] args= {"assets", "import",
+                "--serviceType", "access",
+                "--metadata", "src/test/resources/metadata/example-1.json"};
+        CommandResult result = (CommandResult) CommandLine.call(new OceanCLI(), args);
+        assertTrue(result.isSuccess());
+        assertTrue(!((DDO) result.getResult()).id.isEmpty());
+
+    }
+
+    @Test
+    public void assetsComputingImport() throws CLIException {
+        String[] args= {"assets", "import",
+                "--serviceType", "access",
+                "--metadata", "src/test/resources/metadata/example-algorithm.json",
+                "--provider", "computing-provider-example.json"};
         CommandResult result = (CommandResult) CommandLine.call(new OceanCLI(), args);
         assertTrue(result.isSuccess());
         assertTrue(!((DDO) result.getResult()).id.isEmpty());
@@ -24,7 +38,11 @@ public class AssetsIT {
 
     @Test(expected = CommandLine.ExecutionException.class)
     public void assetsImportError() throws CLIException {
-        String[] args= {"assets", "import", "dksal/xxxx.json"};
+
+        String[] args= {"assets", "import",
+                "--serviceType", "access",
+                "--metadata", "dksal/xxxx.json"};
+
         CommandResult result = (CommandResult) CommandLine.call(new OceanCLI(), args);
         assertTrue(result.isSuccess());
     }

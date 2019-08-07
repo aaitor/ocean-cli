@@ -1,6 +1,12 @@
 History
 =======
 
+0.0.5 (August, 2019)
+-------------------------
+
+* Added import of computing service
+
+
 0.0.4 (June, 2019)
 -------------------------
 

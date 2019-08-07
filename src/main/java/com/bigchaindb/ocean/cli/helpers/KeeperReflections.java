@@ -20,23 +20,23 @@ public class KeeperReflections {
 
     public static final HashMap<String, Class> KEEPER_CLASSES= new HashMap<>() {{
         put("EscrowAccessSecretStoreTemplate", EscrowAccessSecretStoreTemplate.class);
-        put("TemplateStoreLibrary", TemplateStoreLibrary.class);
-        put("AgreementTemplate", AgreementTemplate.class);
+       // put("TemplateStoreLibrary", TemplateStoreLibrary.class);
+       // put("AgreementTemplate", AgreementTemplate.class);
         put("TemplateStoreManager", TemplateStoreManager.class);
         put("OceanToken", OceanToken.class);
         put("Dispenser", Dispenser.class);
         put("HashLockCondition", HashLockCondition.class);
         put("LockRewardCondition", LockRewardCondition.class);
-        put("Condition", Condition.class);
+        //put("Condition", Condition.class);
         put("SignCondition", SignCondition.class);
-        put("ConditionStoreLibrary", ConditionStoreLibrary.class);
+        //put("ConditionStoreLibrary", ConditionStoreLibrary.class);
         put("EscrowReward", EscrowReward.class);
         put("AccessSecretStoreCondition", AccessSecretStoreCondition.class);
         put("ConditionStoreManager", ConditionStoreManager.class);
         put("DIDRegistry", DIDRegistry.class);
         put("AgreementStoreManager", AgreementStoreManager.class);
         put("AgreementStoreManager", AgreementStoreManager.class);
-        put("EpochLibraryProxy", EpochLibraryProxy.class);
+        //put("EpochLibraryProxy", EpochLibraryProxy.class);
     }};
 
 /*    Reflections reflections;
