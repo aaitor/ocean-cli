@@ -19,7 +19,7 @@
 
         <ocean.squid.version>0.5.1</ocean.squid.version>
         <picocli.version>3.9.5</picocli.version>
-		<log4j.version>2.11.1</log4j.version>
+		<log4j.version>2.15.0</log4j.version>
 		<junit.version>4.12</junit.version>
 		<typesafe-config.version>1.3.4</typesafe-config.version>
         <reflections.version>0.9.11</reflections.version>
